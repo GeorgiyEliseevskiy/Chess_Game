@@ -70,7 +70,7 @@ public class Main {
             }
         }
 
-        System.out.println("Король не был в одной клетке два раза");
+        System.out.println("Король не был в одной клетке два раза ");
         return false;
 
     }
