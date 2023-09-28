@@ -21,7 +21,7 @@ public class Main {
         Set<String> visitedPosition = new LinkedHashSet<>(); // Set- структура данных хранящая уникальные значения. LinkedHashSet- сохраняет порядок ввода.
 
         // Делаем ходы королем, пока
-        for (int i = 0; i < n_moves; i++) {
+        for (int i = 0; i < n_moves; i++)  {
 
             do {
                 System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
