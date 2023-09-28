@@ -69,6 +69,7 @@ public class Main {
                 visitedPosition.add(currentPosition);
             }
         }
+
         System.out.println("Король не был в одной клетке два раза");
         return false;
 
