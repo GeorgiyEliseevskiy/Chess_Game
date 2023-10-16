@@ -1,6 +1,9 @@
 package com.company;
 
 import java.util.*;
+import java.util.regex.Pattern;
+
+import static com.company.SubtreeFinder.*;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -8,168 +11,269 @@ public class Main {
     public static void main(String[] args) {
         int[] arr = {53, 16, 32, 465, 88, 9, 10};
 
-
-
-
     }
 
-    // Дано бинарное дерево. Каждую вершину с чётным номером поменять
-    // местами с сыном, имеющим чётный номер.
-    public static void thirdLab() {
-        System.out.println("Input size binary tree: ");
-        int sizeBinaryTree = inputInt();
-        int element = 0;
+    public static boolean isPossibleToPair(int[] numbers, int n, HashMap<Integer, Integer> pairs) {
+        for (int i = 0; i < n; i++) {
+            int num1 = numbers[i];
+            int num2 = numbers[2 * n - i - 1];
 
-        List<Integer> valueBinaryTree = new ArrayList<>(sizeBinaryTree);
+            if (num1 * num2 < 0) {
+                return false; // Если произведение пары имеет разные знаки, разбиение невозможно
+            }
 
-        // Enter value to arrBinaryTree
-        for (int i = 0; i < sizeBinaryTree; i++) {
-            System.out.println("Input value: ");
-            valueBinaryTree.add(inputInt());
+            pairs.put(num1, num2);
         }
-
-        BinaryTree binaryTree = new BinaryTree();
-
-        for(int i : valueBinaryTree) {
-            binaryTree.insert(i);
-        }
-        binaryTree.printTree();
-
-        binaryTree.swapNodesWithEvenChildrenAndPrint();
-
-
+        return true;
     }
 
-    // Дана разреженная матрица (CS) и число b.
-    // Матрица просматривается слева на право, и сверху вниз.
-    // На места ненулевых элементов матрицы вначале поместить все её ненулевые элементы большие b,
-    // а затем ненулевые элементы меньшие b. Элементы не сортировать.
-    public static void secondLab() {
-        // Ввод размеров матрицы (строк и столбцов)
-        System.out.println("Please, input the matrix size (rows, columns)");
-        int rows = inputInt(); // Ввод числа строк
-        int columns = inputInt(); // Ввод числа столбцов
-        Matrix sparseMatrix = new Matrix(rows, columns); // Создание разреженной матрицы
 
-        // Заполнение матрицы значениями
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.println("Enter a value for row " + i + " and column " + j + ":");
-                int value = inputInt(); // Ввод значения для элемента матрицы
-                sparseMatrix.addValue(i, j, value); // Добавление значения в матрицу
-            }
+
+
+
+    // int[] numbers = {2, 3, 4, 6, 1, 12};
+    // int[] numbers = {-2, -3, -4, -6, -1, -12};
+    public static void sixthLab() {
+
+        System.out.print("Введите размер массива (2N): ");
+        int size = inputInt();
+        int[] numbers = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            System.out.print("Введите число #" + (i + 1) + ": ");
+            numbers[i] = inputInt();
         }
 
-        // Вывод исходной матрицы
-        sparseMatrix.printMatrix();
-        System.out.println();
+        // Сортировка массива
+        Arrays.sort(numbers);
 
-        // Ввод значения b
-        System.out.println("Please, input b: ");
-        int b = inputInt(); // Ввод значения b
+        int n = numbers.length / 2;
+        HashMap<Integer, Integer> pairs = new HashMap<>();
 
-        // Перестановка элементов матрицы по заданному порогу b и вывод результата
-        sparseMatrix.rearrangeMatrixByThreshold(b);
+        if (isPossibleToPair(numbers, n, pairs)) {
+            // Вывод пар и произведений
+            for (int i = 0; i < n; i++) {
+                int num1 = pairs.get(numbers[i]);
+                int num2 = numbers[i];
+                int product = num1 * num2;
+                System.out.println(num1 + " " + num2 + " Произведение: " + product);
+            }
+        } else {
+            System.out.println("Невозможно разбить числа на пары с равными произведениями.");
+        }
     }
 
-    //Одинокий король долго ходил по бесконечной шахматной доске.
-    // Известна последовательность из N его ходов (вверх, вниз, влево, вправо, вверх-влево и т.п.).
-    // Написать программу, определяющую побывал ли король дважды
-    // на одном и том же поле за минимально возможное при заданном N число вычислений.
-    public static boolean firstLab(int n_moves) {
+        public static void fifthLab() {
+            MyHashTable<String, Integer> myHashTable = new MyHashTable<>();
+            System.out.print("Введите количество элементов для хэш-таблицы: "); // Запрашиваем количество элементов у пользователя
+            int n = inputInt();
+            String SNILS;
+            int value;
 
-
-        int x = 0;  // Координаты x
-        int y = 0;  // Координаты y
-        String move, currentPosition; // Ход короля | текущая позиция
-        Set<String> visitedPosition = new LinkedHashSet<>(); // Set- структура данных хранящая уникальные значения. LinkedHashSet- сохраняет порядок ввода.
-
-        // Делаем ходы королем, пока
-        for (int i = 0; i < n_moves; i++) {
-
-            do {
-                System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
-                move = scanner.nextLine();
+            for (int i = 0; i < n; i++) {
+                SNILS = inputCorrectSNILS(); // Запрашиваем корректный СНИЛС у пользователя
+                System.out.println("ВВЕДИТЕ данные: ");
+                value = inputInt(); // Запрашиваем целочисленное значение у пользователя
+                myHashTable.put(SNILS, value); // Вставляем пару ключ-значение в хэш-таблицу
             }
-            while (!isCorrectData(move));
 
-            switch (move) {
-                case "вверх":
-                    y++;
-                    break;
-                case "вниз":
-                    y--;
-                    break;
-                case "влево":
-                    x--;
-                    break;
-                case "вправо":
-                    x++;
-                    break;
-                case "вверх-влево":
-                    y++;
-                    x--;
-                    break;
-                case "вверх-вправо":
-                    y++;
-                    x++;
-                    break;
-                case "вниз-влево":
-                    y--;
-                    x--;
-                    break;
-                case "вниз-вправо":
-                    y--;
-                    x++;
-                    break;
+            myHashTable.printTable(); // Выводим содержимое хэш-таблицы на экран
+        }
+
+        public static void fourthLab() {
+            TreeNode root = SubtreeFinder.buildTree();
+            System.out.println("Дерево:");
+            printTree(root);
+
+            TreeNode minRatioSubtree = findSubtreeWithMinRatio(root);
+            TreeNode maxRatioSubtree = findSubtreeWithMaxRatio(root);
+
+            System.out.println("\nПоддерево с минимальным отношением (сумма весов / число вершин):");
+            printTree(minRatioSubtree);
+
+            System.out.println("\nПоддерево с максимальным отношением (сумма весов / число вершин):");
+            printTree(maxRatioSubtree);
+        }
+
+
+        // Дано бинарное дерево. Каждую вершину с чётным номером поменять
+        // местами с сыном, имеющим чётный номер.
+        public static void thirdLab() {
+            System.out.println("Input size binary tree: ");
+            int sizeBinaryTree = inputInt();
+            int element = 0;
+
+            List<Integer> valueBinaryTree = new ArrayList<>(sizeBinaryTree);
+
+            // Enter value to arrBinaryTree
+            for (int i = 0; i < sizeBinaryTree; i++) {
+                System.out.println("Input value: ");
+                valueBinaryTree.add(inputInt());
             }
-            currentPosition = x + ":" + y;
-            System.out.println("Текущая позиция короля: " + currentPosition);
-            if (visitedPosition.contains(currentPosition)) {
-                System.out.println("Король был в этой клетке");
+
+            BinaryTree binaryTree = new BinaryTree();
+
+            for (int i : valueBinaryTree) {
+                binaryTree.insert(i);
+            }
+            binaryTree.printTree();
+
+            binaryTree.swapNodesWithEvenChildrenAndPrint();
+
+
+        }
+
+        // Дана разреженная матрица (CS) и число b.
+        // Матрица просматривается слева на право, и сверху вниз.
+        // На места ненулевых элементов матрицы вначале поместить все её ненулевые элементы большие b,
+        // а затем ненулевые элементы меньшие b. Элементы не сортировать.
+        public static void secondLab() {
+            // Ввод размеров матрицы (строк и столбцов)
+            System.out.println("Please, input the matrix size (rows, columns)");
+            int rows = inputInt(); // Ввод числа строк
+            int columns = inputInt(); // Ввод числа столбцов
+            Matrix sparseMatrix = new Matrix(rows, columns); // Создание разреженной матрицы
+
+            // Заполнение матрицы значениями
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    System.out.println("Enter a value for row " + i + " and column " + j + ":");
+                    int value = inputInt(); // Ввод значения для элемента матрицы
+                    sparseMatrix.addValue(i, j, value); // Добавление значения в матрицу
+                }
+            }
+
+            // Вывод исходной матрицы
+            sparseMatrix.printMatrix();
+            System.out.println();
+
+            // Ввод значения b
+            System.out.println("Please, input b: ");
+            int b = inputInt(); // Ввод значения b
+
+            // Перестановка элементов матрицы по заданному порогу b и вывод результата
+            sparseMatrix.rearrangeMatrixByThreshold(b);
+        }
+
+        //Одинокий король долго ходил по бесконечной шахматной доске.
+        // Известна последовательность из N его ходов (вверх, вниз, влево, вправо, вверх-влево и т.п.).
+        // Написать программу, определяющую побывал ли король дважды
+        // на одном и том же поле за минимально возможное при заданном N число вычислений.
+        public static boolean firstLab(int n_moves) {
+
+
+            int x = 0;  // Координаты x
+            int y = 0;  // Координаты y
+            String move, currentPosition; // Ход короля | текущая позиция
+            Set<String> visitedPosition = new LinkedHashSet<>(); // Set- структура данных хранящая уникальные значения. LinkedHashSet- сохраняет порядок ввода.
+
+            // Делаем ходы королем, пока
+            for (int i = 0; i < n_moves; i++) {
+
+                do {
+                    System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
+                    move = scanner.nextLine();
+                }
+                while (!isCorrectData(move));
+
+                switch (move) {
+                    case "вверх":
+                        y++;
+                        break;
+                    case "вниз":
+                        y--;
+                        break;
+                    case "влево":
+                        x--;
+                        break;
+                    case "вправо":
+                        x++;
+                        break;
+                    case "вверх-влево":
+                        y++;
+                        x--;
+                        break;
+                    case "вверх-вправо":
+                        y++;
+                        x++;
+                        break;
+                    case "вниз-влево":
+                        y--;
+                        x--;
+                        break;
+                    case "вниз-вправо":
+                        y--;
+                        x++;
+                        break;
+                }
+                currentPosition = x + ":" + y;
+                System.out.println("Текущая позиция короля: " + currentPosition);
+                if (visitedPosition.contains(currentPosition)) {
+                    System.out.println("Король был в этой клетке");
+                    return true;
+                } else {
+                    visitedPosition.add(currentPosition);
+                }
+            }
+
+            System.out.println("Король не был в одной клетке два раза ");
+            return false;
+
+        }
+
+
+        // Проверяем входные данные на правильность ввода.
+        public static boolean isCorrectData(String data) {
+
+            // ArrayList<String> - динамический массив хранящий String
+            ArrayList<String> movesKing = new ArrayList<>(
+                    Arrays.asList("вверх", "вниз", "влево", "вправо", "вверх-влево", "вверх-вправо", "вниз-влево", "вниз-вправо"));
+
+            // contains - проверка, содержит ли список data
+            if (movesKing.contains(data)) {
                 return true;
             } else {
-                visitedPosition.add(currentPosition);
+                return false;
             }
         }
 
-        System.out.println("Король не был в одной клетке два раза ");
-        return false;
+        public static int inputInt() {
+            int value = 0;
+            boolean inputValid = false;
 
-    }
-
-
-    // Проверяем входные данные на правильность ввода.
-    public static boolean isCorrectData(String data) {
-
-        // ArrayList<String> - динамический массив хранящий String
-        ArrayList<String> movesKing = new ArrayList<>(
-                Arrays.asList("вверх", "вниз", "влево", "вправо", "вверх-влево", "вверх-вправо", "вниз-влево", "вниз-вправо"));
-
-        // contains - проверка, содержит ли список data
-        if (movesKing.contains(data)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static int inputInt() {
-        int value = 0;
-        boolean inputValid = false;
-
-        while (!inputValid) {
-            if (scanner.hasNextInt()) {
-                value = scanner.nextInt();
-                inputValid = true;
-            } else {
-                System.out.println("Please, input the digit:");
-                scanner.nextLine();
+            while (!inputValid) {
+                if (scanner.hasNextInt()) {
+                    value = scanner.nextInt();
+                    inputValid = true;
+                } else {
+                    System.out.println("Please, input the digit:");
+                    scanner.nextLine();
+                }
             }
+
+            return value;
         }
 
-        return value;
+
+        // Корректный снилс - 123-456-789 01
+
+        public static String inputCorrectSNILS() {
+            Scanner scanner = new Scanner(System.in);
+            String regex = "^\\d{3}-\\d{3}-\\d{3} \\d{2}$"; // Регулярное выражение для СНИЛС
+            Pattern pattern = Pattern.compile(regex);
+            String snils = null;
+
+            do {
+                if (snils != null) {
+                    System.out.println("Введенный СНИЛС не соответствует формату (XXX-XXX-XXX YY). Пожалуйста, попробуйте еще раз.");
+                }
+                System.out.println("Введите СНИЛС (XXX-XXX-XXX YY):");
+                snils = scanner.nextLine();
+            } while (!pattern.matcher(snils).matches());
+
+            return snils;
+        }
+
     }
 
-}
 
