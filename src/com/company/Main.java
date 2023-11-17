@@ -6,10 +6,12 @@ import java.util.regex.Pattern;
 import static com.company.SubtreeFinder.*;
 
 public class Main {
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         int[] arr = {53, 16, 32, 465, 88, 9, 10};
+        Main.firstLab();
 
     }
 
@@ -27,12 +29,9 @@ public class Main {
         return true;
     }
 
-
-
-
-
     // int[] numbers = {2, 3, 4, 6, 1, 12};
     // int[] numbers = {-2, -3, -4, -6, -1, -12};
+
     public static void sixthLab() {
 
         System.out.print("Введите размер массива (2N): ");
@@ -63,7 +62,7 @@ public class Main {
         }
     }
 
-        public static void fifthLab() {
+    public static void fifthLab() {
             MyHashTable<String, Integer> myHashTable = new MyHashTable<>();
             System.out.print("Введите количество элементов для хэш-таблицы: "); // Запрашиваем количество элементов у пользователя
             int n = inputInt();
@@ -80,7 +79,7 @@ public class Main {
             myHashTable.printTable(); // Выводим содержимое хэш-таблицы на экран
         }
 
-        public static void fourthLab() {
+    public static void fourthLab() {
             TreeNode root = SubtreeFinder.buildTree();
             System.out.println("Дерево:");
             printTree(root);
@@ -95,10 +94,9 @@ public class Main {
             printTree(maxRatioSubtree);
         }
 
-
         // Дано бинарное дерево. Каждую вершину с чётным номером поменять
         // местами с сыном, имеющим чётный номер.
-        public static void thirdLab() {
+    public static void thirdLab() {
             System.out.println("Input size binary tree: ");
             int sizeBinaryTree = inputInt();
             int element = 0;
@@ -119,7 +117,6 @@ public class Main {
             binaryTree.printTree();
 
             binaryTree.swapNodesWithEvenChildrenAndPrint();
-
 
         }
 
@@ -159,19 +156,20 @@ public class Main {
         // Известна последовательность из N его ходов (вверх, вниз, влево, вправо, вверх-влево и т.п.).
         // Написать программу, определяющую побывал ли король дважды
         // на одном и том же поле за минимально возможное при заданном N число вычислений.
-        public static boolean firstLab(int n_moves) {
-
+        public static boolean firstLab() {
 
             int x = 0;  // Координаты x
             int y = 0;  // Координаты y
-            String move, currentPosition; // Ход короля | текущая позиция
-            Set<String> visitedPosition = new LinkedHashSet<>(); // Set- структура данных хранящая уникальные значения. LinkedHashSet- сохраняет порядок ввода.
-
+            String move;
+            String currentPosition = "0:0"; // Ход короля | текущая позиция
+            Set<String> visitedPosition = new LinkedHashSet<>(); // Set- структура данных хранящая уникальные зреначения. LinkedHashSet- сохраняет порядок ввода.
+            visitedPosition.add(currentPosition);
+            System.out.println("Введите количество ходов короля: ");
+            int n_moves = inputInt();
             // Делаем ходы королем, пока
+            System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
             for (int i = 0; i < n_moves; i++) {
-
                 do {
-                    System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
                     move = scanner.nextLine();
                 }
                 while (!isCorrectData(move));
@@ -213,18 +211,15 @@ public class Main {
                     return true;
                 } else {
                     visitedPosition.add(currentPosition);
+                    System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
                 }
             }
-
             System.out.println("Король не был в одной клетке два раза ");
             return false;
-
         }
-
 
         // Проверяем входные данные на правильность ввода.
         public static boolean isCorrectData(String data) {
-
             // ArrayList<String> - динамический массив хранящий String
             ArrayList<String> movesKing = new ArrayList<>(
                     Arrays.asList("вверх", "вниз", "влево", "вправо", "вверх-влево", "вверх-вправо", "вниз-влево", "вниз-вправо"));
@@ -236,6 +231,7 @@ public class Main {
                 return false;
             }
         }
+
 
         public static int inputInt() {
             int value = 0;
@@ -254,9 +250,7 @@ public class Main {
             return value;
         }
 
-
         // Корректный снилс - 123-456-789 01
-
         public static String inputCorrectSNILS() {
             Scanner scanner = new Scanner(System.in);
             String regex = "^\\d{3}-\\d{3}-\\d{3} \\d{2}$"; // Регулярное выражение для СНИЛС
