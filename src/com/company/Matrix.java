@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Matrix {
-    private ArrayList<Integer> values; // Array of values
-    private ArrayList<Integer> rowIndices; //Array of line numbers
-    private ArrayList<Integer> colIndices; // Array of column numbers
+    private ArrayList<Integer> values; // Массив значений
+    private ArrayList<Integer> rowIndices; // Массив номеров строк
+    private ArrayList<Integer> colIndices; // Массив номеров столбцов
     private int numRows;
     private int numCols;
 
@@ -19,7 +19,7 @@ public class Matrix {
         colIndices = new ArrayList<>();
     }
 
-    // add value into matrix
+    // добавить значение в матрицу
     public void addValue(int row, int col, int value) {
         if (row < 0 || row >= numRows || col < 0 || col >= numCols) {
             throw new IllegalArgumentException("Invalid row or column index");
@@ -37,9 +37,9 @@ public class Matrix {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
 
-                if (currentIndex < values.size() && // Checking for non-zero elements
-                        rowIndices.get(currentIndex) == i && // Checking for the current element belongs to the row
-                        colIndices.get(currentIndex) == j) { // Checking for the current element belongs to the current column
+                if (currentIndex < values.size() && // Проверка на наличие ненулевых элементов
+                        rowIndices.get(currentIndex) == i && // Проверка принадлежности текущего элемента к строке
+                        colIndices.get(currentIndex) == j) { // Проверка принадлежности текущего элемента к текущему столбцу
                     System.out.print(values.get(currentIndex) + " ");
                     currentIndex++;
                 } else {

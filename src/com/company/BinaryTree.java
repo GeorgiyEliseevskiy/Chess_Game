@@ -3,7 +3,7 @@ package com.company;
 
 public class BinaryTree {
 
-    private static class TreeNode { // static because must not have access to external fields
+    private static class TreeNode { // статический, потому что не должен иметь доступа к внешним полям
         int data;
         TreeNode left;
         TreeNode right;
@@ -21,15 +21,15 @@ public class BinaryTree {
         root = null;
     }
 
-    // Recursive method to add a new element
+    // Рекурсивный метод добавления нового элемента
     public void insert(int data) {
         root = insertRec(root, data);
     }
 
-    // root - current element
-    // if root = null than end to binary tree
-    // Recursively decide which subtree to insert
-    // return root
+    // root - текущий элемент
+    // если root = null, то это конец двоичного дерева
+    // Рекурсивно определяем, какое поддерево вставить
+    // возвращаем root
     public TreeNode insertRec(TreeNode root, int data) {
         if (root == null) {
             root = new TreeNode(data);
@@ -84,7 +84,7 @@ public class BinaryTree {
         printTreeRec(root, 0);
     }
 
-    // Recursive print
+    // Рекурсивная print
     private void printTreeRec(TreeNode currentNode, int level) {
         if (currentNode != null) {
             // Печать уровней
@@ -92,7 +92,7 @@ public class BinaryTree {
                 System.out.print("  ");
             }
             System.out.println(currentNode.data);
-            // Recursive call for left and right subtrees
+            // Рекурсивный вызов для левого и правого поддеревьев
             printTreeRec(currentNode.left, level + 1);
             printTreeRec(currentNode.right, level + 1);
         }

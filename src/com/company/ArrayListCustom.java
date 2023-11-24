@@ -19,7 +19,7 @@ public class ArrayListCustom<E> {
     }
     public E get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+            throw new IndexOutOfBoundsException("Индекс: " + index + ", Размер " + index);
         }
         return (E) elements[index];
     }

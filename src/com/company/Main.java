@@ -238,10 +238,10 @@ public class Main {
                         return true;
                     } else {
                         visitedPosition.clear();
-                        currentPosition = "0:0";
-                        visitedPosition.add(currentPosition);
+                        visitedPosition.add("0:0");
                         x = 0;
                         y = 0;
+                        break;
                     }
                 } else {
                     visitedPosition.add(currentPosition);
@@ -251,19 +251,19 @@ public class Main {
             if (visitedPosition.contains(currentPosition)) {
                 System.out.println("Король не был в одной клетке два раза" +
                         " \nАНАЛИТИК ДРУГ ЧЕЛОВЕКА");
+                System.out.println("Продолжить? 1 - да, 2 - нет");
+                int a = inputInt();
+                if (a == 2) {
+                    isTrue = false;
+                    return true;
+                } else {
+                    visitedPosition.clear();
+                    visitedPosition.add("0:0");
+                    x = 0;
+                    y = 0;
+                }
             }
-            System.out.println("Продолжить? 1 - да, 2 - нет");
-            int a = inputInt();
-            if (a == 2) {
-                isTrue = false;
-                return true;
-            } else {
-                visitedPosition.clear();
-                currentPosition = "0:0";
-                visitedPosition.add(currentPosition);
-                x = 0;
-                y = 0;
-            }
+
         }
         return false;
     }
