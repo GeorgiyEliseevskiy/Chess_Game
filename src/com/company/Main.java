@@ -24,7 +24,7 @@ public class Main {
                 return answerForPanel.charAt(0);
             } else {
                 while (!Character.isDigit(answerForPanel.charAt(0))) {
-                    System.out.println("Please, input the digit");
+                    System.out.println("Пожалуйста, введите цифру");
                     answerForPanel = scanner.nextLine();
                 }
                 return answerForPanel.charAt(0);
@@ -117,7 +117,7 @@ public class Main {
     // Дано бинарное дерево. Каждую вершину с чётным номером поменять
     // местами с сыном, имеющим чётный номер.
     public static void thirdLab() {
-        System.out.println("Input size binary tree: ");
+        System.out.println("Введите размер двоичного дерева: ");
         int sizeBinaryTree = inputInt();
         int element = 0;
 
@@ -125,7 +125,7 @@ public class Main {
 
         // Enter value to arrBinaryTree
         for (int i = 0; i < sizeBinaryTree; i++) {
-            System.out.println("Input value: ");
+            System.out.println("Введите значение: ");
             valueBinaryTree.add(inputInt());
         }
 
@@ -146,7 +146,7 @@ public class Main {
     // а затем ненулевые элементы меньшие b. Элементы не сортировать.
     public static void secondLab() {
         // Ввод размеров матрицы (строк и столбцов)
-        System.out.println("Please, input the matrix size (rows, columns)");
+        System.out.println("Пожалуйста, введите размер матрицы (строки, столбцы)");
         int rows = inputInt(); // Ввод числа строк
         int columns = inputInt(); // Ввод числа столбцов
         Matrix sparseMatrix = new Matrix(rows, columns); // Создание разреженной матрицы
@@ -154,7 +154,7 @@ public class Main {
         // Заполнение матрицы значениями
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                System.out.println("Enter a value for row " + i + " and column " + j + ":");
+                System.out.println("Введите значение для строки " + i + " и колонна " + j + ":");
                 int value = inputInt(); // Ввод значения для элемента матрицы
                 sparseMatrix.addValue(i, j, value); // Добавление значения в матрицу
             }
@@ -239,12 +239,17 @@ public class Main {
                     }
                 } else {
                     visitedPosition.add(currentPosition);
-                    System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
                 }
             }
-            if (!visitedPosition.contains(currentPosition)) {
-                System.out.println("Король не был в одной клетке два раза ");
+            System.out.println("Продолжить? 1 - да, 2 - нет");
+            int a = inputInt();
+            if (a == 2) {
+                isTrue = false;
+                return true;
             }
+        }
+        if (!visitedPosition.contains(currentPosition)) {
+            System.out.println("Король не был в одной клетке два раза ");
         }
         return false;
     }
@@ -281,7 +286,7 @@ public class Main {
                 value = scanner.nextInt();
                 inputValid = true;
             } else {
-                System.out.println("Please, input the digit:");
+                System.out.println("Пожалуйста, введите цифру:");
                 scanner.nextLine();
             }
         }
