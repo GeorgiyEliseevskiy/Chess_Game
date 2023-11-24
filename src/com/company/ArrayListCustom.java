@@ -37,6 +37,25 @@ public class ArrayListCustom<E> {
         return false;
     }
 
+    public void remove(E element) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (element.equals(elements[i])) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            // Сдвигаем элементы после удаляемого на одну позицию влево
+            for (int i = index; i < size - 1; i++) {
+                elements[i] = elements[i + 1];
+            }
+            // Уменьшаем размер списка
+            size--;
+        }
+    }
+
     private void ensureCapacity() {
         int newCapacity = elements.length * 2;
         elements = Arrays.copyOf(elements, newCapacity);
