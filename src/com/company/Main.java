@@ -190,8 +190,8 @@ public class Main {
             int n_moves = inputInt();
 
             // Делаем ходы королем, пока
-            System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
             for (int i = 0; i < n_moves; i++) {
+                System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
                 do {
                     move = scanner.nextLine();
                 }
@@ -236,20 +236,34 @@ public class Main {
                     if (a == 2) {
                         isTrue = false;
                         return true;
+                    } else {
+                        visitedPosition.clear();
+                        currentPosition = "0:0";
+                        visitedPosition.add(currentPosition);
+                        x = 0;
+                        y = 0;
                     }
                 } else {
                     visitedPosition.add(currentPosition);
+                    //System.out.println("Введите ход короля. Возможные ходы: вверх, вниз, влево, вправо, вверх-влево, вверх-вправо, вниз-влево, вниз-вправо");
                 }
+            }
+            if (visitedPosition.contains(currentPosition)) {
+                System.out.println("Король не был в одной клетке два раза" +
+                        " \nАНАЛИТИК ДРУГ ЧЕЛОВЕКА");
             }
             System.out.println("Продолжить? 1 - да, 2 - нет");
             int a = inputInt();
             if (a == 2) {
                 isTrue = false;
                 return true;
+            } else {
+                visitedPosition.clear();
+                currentPosition = "0:0";
+                visitedPosition.add(currentPosition);
+                x = 0;
+                y = 0;
             }
-        }
-        if (!visitedPosition.contains(currentPosition)) {
-            System.out.println("Король не был в одной клетке два раза ");
         }
         return false;
     }
