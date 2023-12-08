@@ -11,12 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
         int[] arr = {53, 16, 32, 465, 88, 9, 10};
-        firstLab();
-
+        fourthLab();
     }
 
-    // Entering and verifying the correct value
-    // if digit: return value | else infinite while until the correct value is entered
+    // Ввод и проверка правильного значения
+    // if digit: возвращаемое значение | else бесконечно долго, пока не будет введено правильное значение
     public static char inputIsCorrect() {
         String answerForPanel = scanner.nextLine();
         try {
@@ -35,15 +34,16 @@ public class Main {
         return '9';
     }
 
+    // Проверка возможности разбиения массива на пары с равными произведениями
     public static boolean isPossibleToPair(int[] numbers, int n, HashMap<Integer, Integer> pairs) {
         for (int i = 0; i < n; i++) {
             int num1 = numbers[i];
             int num2 = numbers[2 * n - i - 1];
-
+            // Проверка знаков произведения пары чисел
             if (num1 * num2 < 0) {
                 return false; // Если произведение пары имеет разные знаки, разбиение невозможно
             }
-
+            // Добавление пары в HashMap
             pairs.put(num1, num2);
         }
         return true;
@@ -51,7 +51,9 @@ public class Main {
 
     // int[] numbers = {2, 3, 4, 6, 1, 12};
     // int[] numbers = {-2, -3, -4, -6, -1, -12};
-
+   /* (Лексикографическая сортировка) Имеется 2*N чисел. Известно, что их можно разбить на пары таким образом, что произведения чисел в парах равны. Сделать разбиение, если числа
+    а) натуральные;
+    б) целые.*/
     public static void sixthLab() {
 
         System.out.print("Введите размер массива (2N): ");
@@ -73,9 +75,13 @@ public class Main {
             // Вывод пар и произведений
             for (int i = 0; i < n; i++) {
                 int num1 = pairs.get(numbers[i]);
+                // Получение первого числа из пары из HashMap по ключу (numbers[i])
                 int num2 = numbers[i];
+                // Получение второго числа из текущего индекса массива
                 int product = num1 * num2;
+                // Вычисление произведения чисел в паре
                 System.out.println(num1 + " " + num2 + " Произведение: " + product);
+                // Вывод пары чисел и соответствующего произведения
             }
         } else {
             System.out.println("Невозможно разбить числа на пары с равными произведениями.");
@@ -102,16 +108,16 @@ public class Main {
     public static void fourthLab() {
         TreeNode root = SubtreeFinder.buildTree();
         System.out.println("Дерево:");
-        printTree(root);
+        printTree(root, 0);
 
         TreeNode minRatioSubtree = findSubtreeWithMinRatio(root);
         TreeNode maxRatioSubtree = findSubtreeWithMaxRatio(root);
 
         System.out.println("\nПоддерево с минимальным отношением (сумма весов / число вершин):");
-        printTree(minRatioSubtree);
+        printTree(minRatioSubtree, 0);
 
         System.out.println("\nПоддерево с максимальным отношением (сумма весов / число вершин):");
-        printTree(maxRatioSubtree);
+        printTree(maxRatioSubtree, 0);
     }
 
     // Дано бинарное дерево. Каждую вершину с чётным номером поменять
@@ -290,7 +296,6 @@ public class Main {
         }
     }
 
-
     public static int inputInt() {
         int value = 0;
         boolean inputValid = false;
@@ -321,7 +326,7 @@ public class Main {
             }
             System.out.println("Введите СНИЛС (XXX-XXX-XXX YY):");
             snils = scanner.nextLine();
-        } while (!pattern.matcher(snils).matches());
+        } while (!pattern.matcher(snils).matches()); // Проверяем корректность снилса с помощью регулярных выражений
 
         return snils;
     }

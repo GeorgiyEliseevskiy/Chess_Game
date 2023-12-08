@@ -1,13 +1,16 @@
 package com.company;
 
-
+//функция работы со строковыми ключами- хэш
+// СНИЛС+++ - ключ
+// опробование
 public class MyHashTable<K, V> {
+
     private static class Entry<K, V> { // Bucket Реализация
         K key;
         V value;
         boolean deleted;
 
-        Entry(K key, V value) {
+        Entry(K key, V value) {  // КОНСТРУКТОР
             this.key = key;
             this.value = value;
             deleted = false;
@@ -22,15 +25,16 @@ public class MyHashTable<K, V> {
     private Entry<K, V>[] table;
     private int size;
 
-    public MyHashTable() {
+    public MyHashTable() { // Конструктор- дефолт емкость
         this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    public MyHashTable(int initialCapacity) {
+    public MyHashTable(int initialCapacity) { // Конструктор- наша собственная емкость
         table = new Entry[initialCapacity];
         size = 0;
     }
 
+    // функция работы со строковыми ключами- хэш
     public static int myHash(String input) {
         int hash = 0;
         for (int i = 0; i < input.length(); i++) {
@@ -40,7 +44,7 @@ public class MyHashTable<K, V> {
         return hash;
     }
 
-    public void put(K key, V value) {
+    public void put(K key, V value) { // Положить в таблицу
         if (key == null) {
             throw new IllegalArgumentException("Ключ не может быть пустым (null)");
         }
@@ -55,7 +59,7 @@ public class MyHashTable<K, V> {
         int originalIndex = index;
         int i = 1;
 
-        // Поиск пустой ячейки (bucket) методом открытой адресации
+        // Поиск пустой ячейки (bucket) методом открытой адресации (опробование)
         while (table[index] != null && !table[index].deleted) {
             // Open addressing: пересчитываем индекс
             index = (originalIndex + i * i) % table.length;
@@ -85,7 +89,7 @@ public class MyHashTable<K, V> {
         return null;
     }
 
-    public void remove(K key) {
+    public void remove(K key) { // удаление
         int hash = myHash(key.toString()); // Вычисление хеш-кода ключа
         int index = hash % table.length; // Вычисление начального индекса
         int originalIndex = index;
@@ -104,7 +108,7 @@ public class MyHashTable<K, V> {
         }
     }
 
-    private void resize() {
+    private void resize() { // Увеличиваем размер
         Entry<K, V>[] newTable = new Entry[table.length * 2];
 
         // Перехеширование элементов в новую таблицу
@@ -128,7 +132,7 @@ public class MyHashTable<K, V> {
         table = newTable; // Заменяем старую таблицу на новую
     }
 
-    public void printTable() {
+    public void printTable() { // Распечатка таблицы
         for (int i = 0; i < table.length; i++) {
             Entry<K, V> entry = table[i];
             if (entry != null && !entry.deleted) {
@@ -136,7 +140,4 @@ public class MyHashTable<K, V> {
             }
         }
     }
-
-
-
 }
