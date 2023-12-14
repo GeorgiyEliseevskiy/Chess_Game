@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.golovolomka.KakuroSolver;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -10,8 +14,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int[] arr = {53, 16, 32, 465, 88, 9, 10};
-        fourthLab();
+
     }
 
     // Ввод и проверка правильного значения
@@ -330,6 +333,7 @@ public class Main {
 
         return snils;
     }
+
 
 }
 
